@@ -8,21 +8,21 @@
 
 ## 🚀 Project Features :
 
-• **Product Management** </br>
+**• Product Management** </br>
 1.Create, read, update, and delete (CRUD) bike products.</br>
 2.Filter bikes by name, brand, or category.</br>
 
-• **Order Management** </br>
+**• Order Management** </br>
 1.Place orders for available bikes.</br>
 2.Inventory is automatically updated based on orders.</br>
 
-• **Revenue Calculation** </br>
+**• Revenue Calculation** </br>
 1.Get total revenue using MongoDB aggregation.</br>
 
-• **Data Validation** </br>
+**• Data Validation** </br>
 1.Enforced data integrity with Mongoose schema and Zod Validation.</br>
 
-• **Error Handling**</br>
+**• Error Handling**</br>
 1.Generic error response structure with meaningful messages.</br>
 
 ## 🛠️ Technology Stack
@@ -59,3 +59,68 @@ npm i
 ```shell
 npm run start:dev
 ```
+
+### Create a Bike
+
+**Endpoint: /api/products**
+**Method : POST**
+Request Body:
+
+```js
+{
+  "name": "Xtreme Mountain Bike",
+  "brand": "Giant",
+  "price": 1200,
+  "category": "Mountain",
+  "description": "A high-performance bike built for tough terrains.",
+  "quantity": 50,
+  "inStock": true
+}
+```
+
+### Get All Bikes
+
+**Endpoint: /api/products**
+**Method : GET**
+Query: A list of all bikes from the same category, accessed via /api/products?searchTerm=category. searchTerm can be name, brand, or category
+
+### Get a Specific Bike
+
+**Endpoint: /api/products/:productId**
+**Method : GET**
+
+### Update a Bike
+
+**Endpoint: /api/products/:productId**
+**Method : PUT**
+
+```js
+{
+  "price": 1300,
+  "quantity": 30
+}
+```
+
+### Delete a Bike
+
+**Endpoint: /api/products/:productId**
+**Method : DELETE**
+
+### Order a Bike
+
+**Endpoint: /api/orders**
+**Method : POST**
+
+```js
+{
+  "email": "customer@example.com",
+  "product": "648a45e5f0123c45678d9012",
+  "quantity": 2,
+  "totalPrice": 2400
+}
+```
+
+### Calculate Revenue from Orders (Aggregation)
+
+**Endpoint:/api/orders/revenue**
+**Method : GET**
