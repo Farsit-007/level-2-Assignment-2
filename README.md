@@ -60,7 +60,7 @@ npm i
 npm run start:dev
 ```
 
-### Create a Bike
+## Create a Bike
 
 **Endpoint: /api/products**</br>
 **Method : POST**</br>
@@ -78,18 +78,18 @@ Request Body:
 }
 ```
 
-### Get All Bikes
+## Get All Bikes
 
 **Endpoint: /api/products**</br>
 **Method : GET**</br>
 Query: A list of all bikes from the same category, accessed via /api/products?searchTerm=category. searchTerm can be name, brand, or category
 
-### Get a Specific Bike
+## Get a Specific Bike
 
 **Endpoint: /api/products/:productId**</br>
 **Method : GET**</br>
 
-### Update a Bike
+## Update a Bike
 
 **Endpoint: /api/products/:productId**</br>
 **Method : PUT**</br>
@@ -101,12 +101,12 @@ Request Body:
 }
 ```
 
-### Delete a Bike
+## Delete a Bike
 
 **Endpoint: /api/products/:productId**</br>
 **Method : DELETE**</br>
 
-### Order a Bike
+## Order a Bike
 
 **Endpoint: /api/orders**</br>
 **Method : POST**</br>
@@ -120,7 +120,7 @@ Request Body:
 }
 ```
 
-### Calculate Revenue from Orders (Aggregation)
+## Calculate Revenue from Orders (Aggregation)
 
 **Endpoint:/api/orders/revenue**</br>
 **Method : GET**</br>
