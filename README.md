@@ -122,5 +122,5 @@ Request Body:
 
 ## Calculate Revenue from Orders (Aggregation)
 
-**Endpoint:/api/orders/revenue**</br>
+**Endpoint: /api/orders/revenue**</br>
 **Method : GET**</br>
