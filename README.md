@@ -62,8 +62,8 @@ npm run start:dev
 
 ### Create a Bike
 
-**Endpoint: /api/products**
-**Method : POST**
+**Endpoint: /api/products**</br>
+**Method : POST**</br>
 Request Body:
 
 ```js
@@ -80,20 +80,20 @@ Request Body:
 
 ### Get All Bikes
 
-**Endpoint: /api/products**
-**Method : GET**
+**Endpoint: /api/products**</br>
+**Method : GET**</br>
 Query: A list of all bikes from the same category, accessed via /api/products?searchTerm=category. searchTerm can be name, brand, or category
 
 ### Get a Specific Bike
 
-**Endpoint: /api/products/:productId**
-**Method : GET**
+**Endpoint: /api/products/:productId**</br>
+**Method : GET**</br>
 
 ### Update a Bike
 
-**Endpoint: /api/products/:productId**
-**Method : PUT**
-
+**Endpoint: /api/products/:productId**</br>
+**Method : PUT**</br>
+Request Body:
 ```js
 {
   "price": 1300,
@@ -103,14 +103,14 @@ Query: A list of all bikes from the same category, accessed via /api/products?se
 
 ### Delete a Bike
 
-**Endpoint: /api/products/:productId**
-**Method : DELETE**
+**Endpoint: /api/products/:productId**</br>
+**Method : DELETE**</br>
 
 ### Order a Bike
 
-**Endpoint: /api/orders**
-**Method : POST**
-
+**Endpoint: /api/orders**</br>
+**Method : POST**</br>
+Request Body:
 ```js
 {
   "email": "customer@example.com",
@@ -122,5 +122,5 @@ Query: A list of all bikes from the same category, accessed via /api/products?se
 
 ### Calculate Revenue from Orders (Aggregation)
 
-**Endpoint:/api/orders/revenue**
-**Method : GET**
+**Endpoint:/api/orders/revenue**</br>
+**Method : GET**</br>
