@@ -11,7 +11,7 @@ app.use('/api/products', ProductRoutes);
 app.use('/api/orders', OrderRoutes);
 
 app.get('/', (req: Request, res: Response) => {
-  res.send('Server is running 2');
+  res.send(`Server is running. Please Search on the "/api/products"`);
 });
 
 export default app;
