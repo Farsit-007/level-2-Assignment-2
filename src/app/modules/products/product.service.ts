@@ -1,6 +1,9 @@
+import QueryBuilder from '../../builder/QueryBuilder';
+import AppError from '../../Errors/AppError';
+import { searchField } from './product.constant';
 import { TProduct } from './product.interface';
 import { Product } from './product.model';
-
+import httpStatus from 'http-status'
 // Create bikes
 const createProductIntoDB = async (productData: TProduct) => {
   const result = await Product.create(productData);
@@ -8,8 +11,9 @@ const createProductIntoDB = async (productData: TProduct) => {
 };
 
 // Get All The bikes
-const getAllDataFromDB = async (productData: TProduct) => {
-  const result = await Product.find(productData);
+const getAllDataFromDB = async (query: Record<string, unknown>) => {
+  const productQuery = new QueryBuilder(Product.find(),query).search(searchField).filter()
+  const result = await productQuery.modelQuery
   return result;
 };
 
@@ -27,12 +31,18 @@ const updateSingleBikeFromDB = async (
   const result = await Product.findByIdAndUpdate(productId, productData, {
     new: true,
   });
+  if(!result){
+    throw new AppError(httpStatus.NOT_FOUND,"Product not founded")
+  }
   return result;
 };
 
 // Delete bikes
 const deleteSingleBikeFromDB = async (productId: string) => {
   const result = await Product.findByIdAndDelete(productId);
+  if(!result){
+    throw new AppError(httpStatus.NOT_FOUND,"Product not founded")
+  }
   return result;
 };
 

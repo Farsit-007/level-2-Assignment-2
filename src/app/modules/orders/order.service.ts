@@ -1,29 +1,35 @@
+import AppError from '../../Errors/AppError';
+import { TProduct } from '../products/product.interface';
 import { Product } from '../products/product.model';
 import { TOrder } from './order.interface';
 import { Order } from './order.model';
-
+import httpStatus from 'http-status'
 // Find Product from DB by ordered product ID
-const getOrderedBikeFromDB = async (productId: string) => {
-  const result = await Product.findById(productId);
-  return result;
-};
+const getOrderedBikeFromDB = async (order : TOrder) => {
+  const product = await Product.findById(order.product)
+  if (!product) {
+    throw new AppError(httpStatus.NOT_FOUND,'Product is not found');
+  }
+  const orderQuantity: number = (product as TProduct).quantity;
 
-// When ordered the product update the quantity/isStock
-const updateOrderBikeFromDB = async (
-  productId: string,
-  updates: Partial<{ quantity: number; inStock: boolean }>,
-) => {
-  const result = await Product.findByIdAndUpdate(
-    productId,
-    { $set: updates },
-    { new: true },
-  );
-  return result;
-};
+  if (order.quantity > orderQuantity) {
+    throw new AppError(httpStatus.NOT_EXTENDED,'Insufficient stock.');
+  }
+  const newQuantity: number = orderQuantity - order.quantity;
+  const inStock = newQuantity > 0;
+  const updates = {
+    quantity: newQuantity,
+    inStock,
+  }
 
-// Create order 
-const makeAOrderIntoDB = async (orderInfo: TOrder) => {
-  const result = await Order.create(orderInfo);
+  const result = await Order.create(order);
+  if(result){
+    await Product.findByIdAndUpdate(
+      product,
+      { $set: updates },
+      { new: true },
+    );
+  }
   return result;
 };
 
@@ -70,7 +76,5 @@ const getAllOrderRevenue = async () => {
 
 export const OrderService = {
   getOrderedBikeFromDB,
-  updateOrderBikeFromDB,
-  makeAOrderIntoDB,
   getAllOrderRevenue,
 };
