@@ -3,6 +3,7 @@ export type TProduct = {
   brand: string;
   price: number;
   category: 'Mountain' | 'Road' | 'Hybrid' | 'Electric';
+  image: string | File;
   description : string,
   quantity : number,
   inStock : boolean,

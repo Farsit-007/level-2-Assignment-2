@@ -13,6 +13,11 @@ const productSchema = new Schema<TProduct>(
       trim: true,
       required: [true, 'Brand is required.'],
     },
+    image: {
+      type: String || File,
+      trim: true,
+      required: [true, 'Image is required.'],
+    },
     price: {
       type: Number,
       required: [true, 'Price is required.'],
@@ -41,7 +46,6 @@ const productSchema = new Schema<TProduct>(
     },
     inStock: {
       type: Boolean,
-
     },
   },
   {

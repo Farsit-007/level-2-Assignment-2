@@ -17,12 +17,12 @@ const loginUserIntoDB = async (payload: TLoginUser) => {
     throw new AppError(httpStatus.FORBIDDEN, 'This user is blocked !');
   }
   if (!(await User.isPasswordMatched(payload?.password, user?.password)))
-    throw new AppError(httpStatus.FORBIDDEN, 'Password do not matched');
+    throw new AppError(httpStatus.FORBIDDEN, 'Invalid Credentials');
 
   const jwtPayload = {
     userEmail: user.email,
     role: user.role,
-    name : user.name
+    name: user.name,
   };
   const token = createToken(
     jwtPayload,
@@ -55,7 +55,7 @@ const changePasswordIntoDB = async (
     throw new AppError(httpStatus.FORBIDDEN, 'This user is blocked !');
   }
   if (!(await User.isPasswordMatched(payload?.oldPassword, user?.password)))
-    throw new AppError(httpStatus.FORBIDDEN, 'Password do not matched');
+    throw new AppError(httpStatus.FORBIDDEN, 'Invalid Credentials');
 
   const newHashedPassword = await bcrypt.hash(payload.newPassword, Number(12));
 
@@ -63,7 +63,7 @@ const changePasswordIntoDB = async (
     {
       email: user.email,
       role: user.role,
-      name : user.name
+      name: user.name,
     },
     {
       password: newHashedPassword,
@@ -80,7 +80,7 @@ const refreshToken = async (accessToken: string) => {
     config.jwt_refresh_secret as string,
   ) as JwtPayload;
 
-  const { userEmail, iat } = decoded
+  const { userEmail, iat } = decoded;
 
   const user = await User.isUserExists(userEmail);
   if (!user) {
@@ -90,7 +90,7 @@ const refreshToken = async (accessToken: string) => {
   // checking if the user is blocked
   const userStatus = user?.isBlock;
   if (userStatus) {
-    throw new AppError(httpStatus.FORBIDDEN, 'This user is blocked ! !');
+    throw new AppError(httpStatus.FORBIDDEN, 'This user is blocked');
   }
 
   if (
@@ -106,7 +106,7 @@ const refreshToken = async (accessToken: string) => {
   const jwtPayload = {
     userEmail: user.email,
     role: user.role,
-    name : user.name
+    name: user.name,
   };
   const token = createToken(
     jwtPayload,

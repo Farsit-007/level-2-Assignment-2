@@ -8,10 +8,25 @@ const orderSchema = new Schema<TOrder>(
       trim: true,
       required: [true, 'email is required.'],
     },
-    product: {
+    name: {
       type: String,
       trim: true,
+      required: [true, 'name is required.'],
+    },
+    product: {
+      type: Schema.Types.ObjectId,
+      trim: true,
       required: [true, 'Product Id is required.'],
+    },
+    productName: {
+      type: String,
+      trim: true,
+      required: [true, 'Product Name is required.'],
+    },
+    productImage: {
+      type: String,
+      trim: true,
+      required: [true, 'Product Image is required.'],
     },
     quantity: {
       type: Number,
@@ -24,6 +39,20 @@ const orderSchema = new Schema<TOrder>(
       trim: true,
       required: [true, 'Total Price is required.'],
       min: [0, 'Total Price must be a positive number'],
+    },
+    status: {
+      type: String,
+      enum: ['Pending', 'Paid', 'Shipped', 'Completed', 'Cancelled'],
+      default: 'Pending',
+    },
+    transaction: {
+      id: String,
+      transactionStatus: String,
+      bank_status: String,
+      sp_code: String,
+      sp_message: String,
+      method: String,
+      date_time: String,
     },
   },
   {

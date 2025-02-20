@@ -4,7 +4,7 @@ import { sendResponse } from '../../utils/sendResponse';
 import httpStatus from 'http-status';
 // Order a bikes
 const createOrder = catchAsync(async (req, res) => {
-  const result = await OrderService.getOrderedBikeFromDB(req.body);
+  const result = await OrderService.getOrderedBikeFromDB(req.body, req.ip!);
   sendResponse(res, {
     statusCode: httpStatus.CREATED,
     success: true,
@@ -24,7 +24,44 @@ const getTotalRevenue = catchAsync(async (req, res) => {
   });
 });
 
+const verifyPayment = catchAsync(async (req, res) => {
+  const order = await OrderService.verifyPaymentDB(
+    req.query.order_id as string,
+  );
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Order verified successfully',
+    data: order,
+  });
+});
+
+const getOrders = catchAsync(async (req, res) => {
+  const order = await OrderService.getOrders();
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Order retrieved successfully',
+    data: order,
+  });
+});
+
+const getUserOrder = catchAsync(async (req, res) => {
+  const order = await OrderService.getUserOrder(req.params.email);
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Order retrieved successfully',
+    data: order,
+  });
+});
+
 export const OrderController = {
   createOrder,
+  verifyPayment,
   getTotalRevenue,
+  getOrders,
+  getUserOrder,
 };

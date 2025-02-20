@@ -15,15 +15,26 @@ const createProduct = catchAsync(async (req, res) => {
 });
 
 // Find Bikes by searching with "Name","Brand","Category"
-const getAllProducts =catchAsync( async (req, res) => {
-    const result = await ProductService.getAllDataFromDB(req.query);
-    sendResponse(res, {
-      statusCode: httpStatus.OK,
-      success: true,
-      message: 'Product retrieved Successfully',
-      data: result,
-  })
-})
+const getAllProducts = catchAsync(async (req, res) => {
+  const result = await ProductService.getAllDataFromDB(req.query);
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Product retrieved Successfully',
+    data: result,
+  });
+});
+
+// Find Bikes by searching with "Name","Brand","Category"
+const featuredProduct = catchAsync(async (req, res) => {
+  const result = await ProductService.getFeaturedDataFromDB();
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Product retrieved Successfully',
+    data: result,
+  });
+});
 
 // Find single bike by ID
 const getSingleBike = catchAsync(async (req, res) => {
@@ -67,5 +78,6 @@ export const ProductController = {
   getAllProducts,
   getSingleBike,
   updateSingleBike,
+  featuredProduct,
   deleteSingleBike,
 };

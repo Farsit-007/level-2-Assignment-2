@@ -6,6 +6,11 @@ const createUserIntoDB = async (payload: TUser) => {
   return result;
 };
 
+const getAllUserFromDB = async () => {
+  const result = await User.find({ role: 'customer' });
+  return result;
+};
+
 const updateUserFromDB = async (userId: string, payload: Partial<TUser>) => {
   const result = await User.findByIdAndUpdate(userId, payload, {
     new: true,
@@ -16,4 +21,5 @@ const updateUserFromDB = async (userId: string, payload: Partial<TUser>) => {
 export const UserServices = {
   createUserIntoDB,
   updateUserFromDB,
+  getAllUserFromDB
 };
