@@ -26,6 +26,10 @@ const userSchema = new Schema<TUser, UserModel>(
       type: String,
       required: [true, 'Phone is required.'],
     },
+    image: {
+      type: String,
+      required: [true, 'Image is required.'],
+    },
     password: {
       type: String,
       required: [true, 'Password is required.'],

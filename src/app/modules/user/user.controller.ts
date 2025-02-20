@@ -29,7 +29,29 @@ const updateUser = catchAsync(async (req, res) => {
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: 'User updated successfully',
+    message: 'User blocked successfully',
+    data: result,
+  });
+});
+
+const getSingleUser = catchAsync(async (req, res) => {
+  const email = req.params.email;
+  const result = await UserServices.getSingleUserFromDB(email);
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'User founded successfully',
+    data: result,
+  });
+});
+
+const updateProfileUser = catchAsync(async (req, res) => {
+  const email = req.params.email;
+  const result = await UserServices.updateProfileUserFromDB(email, req.body);
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Profile updated successfully',
     data: result,
   });
 });
@@ -38,4 +60,6 @@ export const UserController = {
   createUser,
   updateUser,
   getAllUser,
+  getSingleUser,
+  updateProfileUser,
 };

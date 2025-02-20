@@ -18,8 +18,25 @@ const updateUserFromDB = async (userId: string, payload: Partial<TUser>) => {
   return result;
 };
 
+const updateProfileUserFromDB = async (
+  email: string,
+  payload: Partial<TUser>,
+) => {
+  const result = await User.findOneAndUpdate({ email }, payload, {
+    new: true,
+  });
+  return result;
+};
+
+const getSingleUserFromDB = async (email: string) => {
+  const result = await User.findOne({ email });
+  return result;
+};
+
 export const UserServices = {
   createUserIntoDB,
   updateUserFromDB,
-  getAllUserFromDB
+  getAllUserFromDB,
+  getSingleUserFromDB,
+  updateProfileUserFromDB,
 };
