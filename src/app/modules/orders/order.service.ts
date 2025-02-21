@@ -16,7 +16,7 @@ const getOrderedBikeFromDB = async (order: TOrder, client_ip: string) => {
   const orderQuantity: number = (product as TProduct).quantity;
 
   if (order.quantity > orderQuantity) {
-    throw new AppError(httpStatus.NOT_EXTENDED, 'Insufficient stock.');
+    throw new AppError(httpStatus.NOT_EXTENDED, 'This product is out of stock');
   }
   const newQuantity: number = orderQuantity - order.quantity;
   const inStock = newQuantity > 0;

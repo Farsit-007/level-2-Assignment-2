@@ -74,7 +74,6 @@ const changePasswordIntoDB = async (
 };
 
 const refreshToken = async (accessToken: string) => {
-  //Check the Token is valid
   const decoded = jwt.verify(
     accessToken,
     config.jwt_refresh_secret as string,
