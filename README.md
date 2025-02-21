@@ -1,4 +1,4 @@
-## Assignment - 2
+## Assignment - 2 (Updated For The Assignment-4)
 
 ## Student Id - WEB9-1722
 
@@ -44,8 +44,18 @@ cd level-2-Assignment-2
 ### .env file
 
 ```js
-PORT = ...
-DATABASE_URI = ...
+PORT = 
+DATABASE_URI = 
+NODE_ENV = Development
+
+JWT_ACCESS_SECRET = 
+JWT_REFRESH_SECRET = 
+
+SP_ENDPOINT=https://sandbox.shurjopayment.com
+SP_USERNAME=sp_sandbox
+SP_PASSWORD=pyyk97hu&6u6
+SP_PREFIX=SP
+SP_RETURN_URL=https://sandbox.shurjopayment.com/response
 ```
 
 ### Install NPM
