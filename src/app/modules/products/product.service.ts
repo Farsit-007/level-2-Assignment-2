@@ -12,6 +12,7 @@ const createProductIntoDB = async (productData: TProduct) => {
 
 // Get All The bikes
 const getAllDataFromDB = async (query: Record<string, unknown>) => {
+  console.log(query);
   const productQuery = new QueryBuilder(Product.find(), query)
     .search(searchField)
     .filter();

@@ -25,12 +25,28 @@ class QueryBuilder<T> {
   }
 
   filter() {
-    const queryObj = { ...this.query };
-    const excludeFields = ['searchTerm', 'sort'];
-    excludeFields.forEach((el) => delete queryObj[el]);
-    this.modelQuery = this.modelQuery.find(queryObj as FilterQuery<T>);
-    return this;
+  const queryObj = { ...this.query };
+  const excludeFields = ['searchTerm', 'sort', 'minPrice', 'maxPrice'];
+  excludeFields.forEach((el) => delete queryObj[el]);
+
+  const priceFilter: Record<string, unknown> = {};
+
+  if (this.query.minPrice || this.query.maxPrice) {
+    priceFilter['price'] = {};
+    
+    if (this.query.minPrice) {
+      (priceFilter['price'] as Record<string, number>)['$gte'] = Number(this.query.minPrice);
+    }
+    if (this.query.maxPrice) {
+      (priceFilter['price'] as Record<string, number>)['$lte'] = Number(this.query.maxPrice);
+    }
   }
+
+  this.modelQuery = this.modelQuery.find({ ...queryObj, ...priceFilter } as FilterQuery<T>);
+
+  return this;
+}
+
 }
 
 export default QueryBuilder;
