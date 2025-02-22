@@ -82,10 +82,12 @@ const verifyPaymentDB = async (order_id: string) => {
           verifiedPayment[0].bank_status == 'Success'
             ? 'Paid'
             : verifiedPayment[0].bank_status == 'Failed'
-              ? 'Pending'
-              : verifiedPayment[0].bank_status == 'Cancel'
-                ? 'Cancelled'
-                : '',
+              ? 'Failed'
+              : verifiedPayment[0].bank_status == 'Pending'
+                ? 'Pending'
+                : verifiedPayment[0].bank_status == 'Cancel'
+                  ? 'Cancelled'
+                  : '',
       },
     );
   }
